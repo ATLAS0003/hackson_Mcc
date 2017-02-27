@@ -1,3 +1,4 @@
+//Mcc_hackason slackおしゃべりbot
 
 if (!process.env.token) {
     console.log('Error: Specify token in environment');
@@ -15,16 +16,14 @@ var bot = controller.spawn({
     token: process.env.token
 }).startRTM();
 //文字コード変換
-var encoding = require('./encoding.js/encoding.js');
+//var encoding = require('./encoding.js/encoding.js');
 //文字コード変換は使わないかもです
 var controller = Botkit.slackbot({
     debug: false
 });
-
 controller.spawn({
     token: process.env.token
 }).startRTM();
-
 
 controller.hears('おはよう', 'direct_message,direct_mention,mention',function(bot,message){
     bot.reply(message, 'おはようございます');
