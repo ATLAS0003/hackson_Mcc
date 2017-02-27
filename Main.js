@@ -25,8 +25,32 @@ controller.spawn({
     token: process.env.token
 }).startRTM();
 //すべての発言に反応する
-controller.hears('', 'direct_message,direct_mention,mention',function(bot,message){
-    bot.reply(message, 'おはようございます');
+controller.hears('REACTION', 'direct_message,direct_mention,mention',function(bot,message){
+    
+    //at reply
+    controller.storage.users.get(message.user, function (err, user_info)
+    {
+        bot.reply(message, "<@" + message.user + ">");
+    });
+
+   });
+
+controller.hears('IMAGE', 'direct_message,direct_mention,mention', function (bot, message) {
+
+    //at reply
+    /*controller.storage.users.get(message.user, function (err, user_info)
+    {
+        bot.reply(message, "<@" + message.user + ">");
+    });*/
+    var fs = require('fs');
+    bot.api.files.upload(
+        {
+            file: fs.createReadStream('./hoge.png'),
+            filename: 'hoge.png',
+            channels: message.channel
+        }, function (err, res) {
+            if (err) console.log(err)
+        });
 });
 
 controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function (bot, message) {
