@@ -24,8 +24,8 @@ var controller = Botkit.slackbot({
 controller.spawn({
     token: process.env.token
 }).startRTM();
-
-controller.hears('おはよう', 'direct_message,direct_mention,mention',function(bot,message){
+//すべての発言に反応する
+controller.hears('', 'direct_message,direct_mention,mention',function(bot,message){
     bot.reply(message, 'おはようございます');
 });
 
