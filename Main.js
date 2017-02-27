@@ -24,7 +24,7 @@ function include(fileName) {
     document.body.appendChild(scriptE);
 }*/
 var encoding = require('./encoding.js/encoding.js');
-
+//文字コード変換は使わないかもです
 var controller = Botkit.slackbot({
     debug: false
 });
