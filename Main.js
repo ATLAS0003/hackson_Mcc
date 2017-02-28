@@ -59,11 +59,13 @@ var reader = require('readline').createInterface({
     input: process.stdin,
     output: process.stdout
 });
+var missedFlag = 0;
 //REACTIONという入力があると前のユーザーに:+1:する
 function feelings(objf) {
         console.log(message1);
         bot.reply(message1, "<@" + message1.user + ">" + objf);
         lines = [];
+        missedFlag = 0;
 }
 function picfeelings(pobjf) {
         console.log(message1);
@@ -78,6 +80,7 @@ function picfeelings(pobjf) {
                 if (err) console.log(err)
             });
         lines = [];
+        missedFlag = 0;
 }
 //いつでも読み込む
 reader.on('line', function (line) {
@@ -86,13 +89,15 @@ reader.on('line', function (line) {
     if (lines[1] != null) {
         if (lines[0] == 'REACTION') {
             feelings(lines[1]);
-        }else if(lines[0] =='IMAGE')
-            picfeelings( lines[1]);
+        } else if (lines[0] == 'IMAGE')
+            picfeelings(lines[1]);
+    } else {
+        missedFlag = 1;
     }
 });
 
 //直前にリプライ飛ばした人に対して画像を送る
-controller.hears(['IMAGE'], 'direct_message,direct_mention,mention', function (bot, message) {
+/*controller.hears(['IMAGE'], 'direct_message,direct_mention,mention', function (bot, message) {
 
     //at reply
     controller.storage.users.get(message.user, function (err, user_info)
@@ -109,7 +114,7 @@ controller.hears(['IMAGE'], 'direct_message,direct_mention,mention', function (b
         }, function (err, res) {
             if (err) console.log(err)
         });
-});
+});*/
 //bot終了コマンド
 controller.hears(['shutdown'], 'direct_message,direct_mention,mention', function (bot, message) {
 
