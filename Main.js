@@ -16,8 +16,6 @@ var os = require('os');
 var controller = Botkit.slackbot({
     debug: true,
 });
-//var ti = "xoxb-146680419635-cNiFnRi9fyO2fvMrOnHuIhuy";
-
 //環境変数process.env.tokenを代入
 
 var bot = controller.spawn({
@@ -35,7 +33,7 @@ var controller = Botkit.slackbot({
 controller.spawn({
     token: process.env.token
 }).startRTM();
-
+var  message;
 //すべての発言に反応する
 //直前にリプライ飛ばした人に対して@リアクション
 controller.hears(['REACTION'], 'direct_message,direct_mention,mention',function(bot,message){
